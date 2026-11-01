@@ -162,6 +162,10 @@ motion, passes that can be toggled) belongs there.
       enhance.toml, README, licenses, VERSION with both trees' commits).
 - [x] A build for the Steam Deck too: deck-build.sh compiles in an Ubuntu
       24.04 container (glibc 2.38 needed; SteamOS has 2.41).
+- [x] A download with no part of the game in it: an AppImage whose launcher
+      takes the player's copy, checks it and builds the game on their computer
+      (tools/release/linux.sh, NOTES.md "The download").
+- [ ] A Windows download: the game has not been built for Windows yet.
 
 ## 6. Remove the overhead
 

@@ -398,6 +398,35 @@ code in podman (localhost/ds2-build:24.04, container/: Ubuntu 24.04, Clang
 20) into build/deck: glibc 2.38, GLIBCXX 3.4.32, the same five libraries
 (SDL2, libepoxy, OpenSSL 3, libstdc++, glibc).
 
+## The download, 2026-11-01
+
+The method of the Test Drive 6 and 1NSANE ports' downloads: an AppImage with no
+part of the game in it (launcher/launcher.c, tools/release/linux.sh). The
+launcher asks for the player's copy; tools/install.py reads a folder or a disc
+image (its own small XDVDFS reader, at the partition offsets of an extracted
+image, XGD1, XGD2 and XGD3) and checks each file against tools/disc.manifest;
+tools/translate.py runs regen.sh's steps on the bundled Python; Zig compiles
+the result and links it with the runtime built ahead of time.
+
+- The runtime is built in the SteamOS container (glibc 2.38, Clang 20, Ubuntu's
+  static libraries), at neutral folder names. Zig (Clang 22) compiles only
+  the translated code, for the same glibc, and links libstdc++.a and
+  libgcc_eh.a from the container directly. [verified 2026-11-01: the player's
+  build drives into mission 1 with no failed calls, stubs or crashes; first run
+  from a new save stops at car select, as a clang build's does.]
+- GEN_SHA256: the hooks are compiled against the translator's declarations, so
+  the player's translation must hash the same as the build's. It caught the
+  translator's missing templates/runtime/recomp_types.h, which the toolkit only warns about.
+- Setup from the disc image: about 2.5 minutes at 6 compile jobs, about 430 MB.
+- The translator runs from the mounted, read-only AppImage: the one step that
+  writes beside itself by default (merge_names.py) is given --out.
+- xdk_names.json is not in the toolkit, so that step loads 0 names; regen.sh's
+  output is the same with or without it.
+- SDL2 2.32.10 goes with the game (bin/lib, the game's rpath), built from its
+  source release with its system libraries loaded at run time: it needs only
+  libc and libm to start [verified: readelf]. Ubuntu's own needs 19 libraries
+  directly, so it can't be carried as it is.
+
 ## Settings in OPTIONS, 2026-10-25
 
 The runtime's settings overlay is built in now (XBOXRECOMP_OVERLAY on for

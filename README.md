@@ -37,6 +37,18 @@ All optional, in the game's own OPTIONS menu under PC SETTING (see Settings):
 - It runs at the game's own 30 frames a second. Faster is not an option: its
   logic steps once a frame.
 
+## Download (Linux)
+
+The AppImage on the [releases page](https://github.com/AntAir267/double-steal-2-recompiled/releases)
+holds no part of the game. The first time you run it, it asks for your copy (a disc
+image, or a folder of the extracted game), checks every file against the known release,
+then translates the game and compiles it on your computer. That takes a few minutes, once,
+and about 430 MB in `~/.local/share/double-steal-2-recompiled`, with your saves. After
+that it starts the game at once.
+
+It needs a 64-bit Linux with glibc 2.38 or newer (Ubuntu 24.04, Fedora 39 or later) and a
+Vulkan driver. There is no Windows version yet.
+
 ## Building (Linux)
 
 Needs Clang 20 and lld, CMake, Ninja, Python 3.10+, and development files for

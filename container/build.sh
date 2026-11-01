@@ -8,7 +8,7 @@ set -euo pipefail
 DS2="$(cd "$(dirname "$0")/.." && pwd)"
 RT="${XBOXRECOMP_DIR:-$DS2/../xboxrecomp-takedawn}"
 [ -d "$RT" ] || RT="$DS2/../antbox"
-B="$DS2/build/deck"
+B="${DS2_BUILD_DIR:-$DS2/build/deck}"
 # Every time, so an option added since (the settings overlay) reaches a tree
 # configured before it; cheap once configured.
 cmake -S "$DS2" -B "$B" -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo \
