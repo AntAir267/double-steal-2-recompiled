@@ -1,0 +1,22 @@
+[
+ {
+  "start": "0x001BA570",
+  "note": "XPP (controller library) function right after a `ret 8`. Reached only through a function pointer: the takedawn branch's disassembler missed it and the run failed '[ICALL] Failed to resolve VA 0x001BA570' just after the pad came up. Upstream v0.16 finds it (tail_jump_alias)."
+ },
+ {
+  "start": "0x0010A9B8",
+  "note": "Case 7 of the Options screen's input switch (sub_0010A900, 0x0010A900-0x0010AA21). The detector ended sub_0010A900 at its first ret (0x0010A959) because a gap_prologue start at 0x0010A95C clamped it, so its je targets beyond that became stubs. In a gap, ends with jmp 0x0010A945 back into sub_0010A900."
+ },
+ {
+  "start": "0x0010A9E7",
+  "note": "Case 6 of the same switch (A on Controller Setting). The stub popped only a return address: the screen's setup was skipped and the caller's esi became a return address, then a crash (sub_0010A3D0 reading [esi+0x24]). In a gap; ends with pop ebx / ret 0xC like the function it belongs to."
+ },
+ {
+  "start": "0x0011E75A",
+  "note": "CRT x87 error path: sub_0011E55C jumps to 0x0011E75A, the second instruction of sub_0011E758 (fstp st0; fstp st0; fldz; ret). Seeding splits that 7-byte function with a fall-through tail call, which the lifter emits; the stub skipped the fstp/fldz."
+ },
+ {
+  "start": "0x00142F99",
+  "note": "D3DX's libjpeg error manager callback, installed by mov [eax+0xC], 0x00142F99 at 0x0014380F. It follows libjpeg's error_exit (0x00142F7D), which ends in a call to longjmp (0x0011C884) and a dead pop esi, so nothing before it returns and the fork's clean-start rule for immediates (3364bf7) no longer takes it as a function. Seeded to keep it [verified: disassembly], as the Wreckless port seeded its own D3DX callback after longjmp."
+ }
+]

@@ -1,0 +1,8 @@
+{
+  "auto": false,
+  "sites": [
+    {"va": "0x0012FAB0", "note": "D3D KickOff (sub_0012FA70): spins until the GPU clears the kick bit, 0x100410 bit 16; the runtime's ack wakes it (kick_cleared). 90% of the main thread on the mission drive (DS2_PROFILE)"},
+    {"va": "0x0012FB60", "note": "the same wait in sub_0012FB20, the other KickOff"}
+  ],
+  "exclude": []
+}

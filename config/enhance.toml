@@ -1,0 +1,55 @@
+# Double-S.T.E.A.L: The Second Clash - enhancement settings.
+#
+# Read at start from beside the executable. The environment overrides a
+# key here (RECOMP_RENDER_SCALE for render.scale, and so on); the runtime's
+# docs/runtime/enhance-config.md lists them all. A key left out runs the
+# game as the console did.
+
+[display]
+# The Xbox dashboard's video settings, which the game reads itself. With
+# 720p the game runs its own HD mode: 1280x720, 16:9 when widescreen is on.
+# "off" is the console's default 480-line picture.
+hdtv = "720p"
+widescreen = true
+
+[render]
+# Internal resolution: 2 draws every target at twice the size (the 3D at
+# 1536x1344 in 720p) and filters it down. 1 is the console's own.
+scale = 2
+
+[graphics]
+# Anisotropic filtering: textures seen at an angle (the road ahead) stay
+# sharp into the distance. "off", "2", "4", "8" or "16".
+aniso = "16"
+# Anti-aliasing of the finished frame: "off", "fxaa" or "smaa". The 3D is
+# already drawn at twice the size (render.scale), so it is off; "smaa"
+# smooths what edges remain but softens the menu text a little.
+aa = "off"
+
+[present]
+# The game keeps its HD picture inside the TV-safe area (a TV's overscan
+# hid the border): "clip" shows just that part, edge to edge. "off" shows
+# the whole 1280x720 frame, border and all.
+crop = "clip"
+# How the window scales the frame: "nearest", "linear" or "integer".
+filter = "linear"
+# How a frame waits for its vblank (the Power mode in PC SETTING): "sleep"
+# with spin_lead 8 is Balanced (sleeps, then spins the last 8 ms; steady at
+# 30 fps and a core less busy), spin_lead 0 Battery saver; "spin" busy-waits
+# the whole wait (the runtime's stock).
+pacing = "sleep"
+spin_lead = 8
+fullscreen = false
+
+[system]
+# The dashboard's language: "english" or "japanese" (the disc has both).
+language = "english"
+
+[game]
+# Start at the title screen, without the Bunkasha logo movie.
+skip_intro = false
+# The controller hums with the engine's load whenever you accelerate, as on
+# the console (up to a third of full on both motors, which a modern pad
+# plays as a steady vibration). false keeps only the knocks: collisions,
+# rough road, the rev limiter.
+engine_vibration = false

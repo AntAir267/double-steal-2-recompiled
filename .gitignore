@@ -1,0 +1,25 @@
+# Build artifacts
+build/
+bin/
+dist/
+
+# Generated recompiled source (regen.sh; too large for git, and derived
+# from the user's own default.xbe)
+src/game/recomp/gen/
+src/game/recomp/gen-*/
+
+# Game files and disc images (not redistributable)
+/game/
+*.iso
+*.xiso
+*.7z
+*.zip
+
+# Scratch work, local tool installs (kept out of git; survives reboots)
+/work/
+.venv/
+__pycache__/
+*.pyc
+
+# Logs
+*.log

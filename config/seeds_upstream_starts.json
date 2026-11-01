@@ -1,0 +1,38 @@
+[
+ {
+  "start": "0x000A5170",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x0012D6D0",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x0012E540",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001B8E03",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001B9754",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001B9B1C",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001B9B6E",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001B9F51",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ },
+ {
+  "start": "0x001BE02F",
+  "note": "start upstream xboxrecomp v0.16 finds and the takedawn branch does not; follows a ret or padding"
+ }
+]
