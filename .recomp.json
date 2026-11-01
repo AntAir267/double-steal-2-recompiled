@@ -1,0 +1,17 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "Double-S.T.E.A.L: The Second Clash",
+  "system": "Xbox",
+  "type": "recomp",
+  "original": { "region": "Japan" },
+  "project": "Double-S.T.E.A.L: The Second Clash Recompiled",
+  "status": "in-progress",
+  "targets": ["Linux"],
+  "toolchain": "Xboxrecomp",
+  "approach": "Static recompilation to C on antbox, an xboxrecomp fork; the game's own Xbox graphics commands drawn with Vulkan",
+  "started": "2026-10-24",
+  "maintainers": [{ "name": "AntAir267", "link": "https://github.com/AntAir267" }],
+  "links": [{ "label": "Toolkit (antbox)", "url": "https://github.com/AntAir267/antbox" }],
+  "help": ["Playing missions start to finish", "Testing on other graphics cards", "Testing with several real controllers"],
+  "notes": "Alpha. The menus and mission 1 work, with saves, replays, English and Japanese. Nobody has finished the game on it yet. Options include the game's own 720p, widescreen, higher internal resolution and anisotropic filtering, on a PC SETTING page in the game's look. Runs at the game's own 30 fps."
+}
