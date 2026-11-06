@@ -7,7 +7,7 @@
   "project": "Double-S.T.E.A.L: The Second Clash Recompiled",
   "status": "in-progress",
   "targets": ["Linux"],
-  "toolchain": "Xboxrecomp",
+  "toolchain": "Antbox",
   "approach": "Static recompilation to C on antbox, an xboxrecomp fork; the game's own Xbox graphics commands drawn with Vulkan",
   "started": "2026-10-24",
   "maintainers": [{ "name": "AntAir267", "link": "https://github.com/AntAir267" }],
