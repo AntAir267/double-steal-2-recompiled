@@ -110,6 +110,7 @@ cp -r "$CAP/capstone" "$B/python/lib/python3.14/site-packages/"
 find "$B/python/lib/python3.14/site-packages/capstone" -name __pycache__ -prune -exec rm -r {} +
 git -C "$XR" archive HEAD tools templates | tar -x -C "$B/tools/toolkit" --exclude=tools/nvr_replay --exclude=tools/conformance
 cp tools/install.py tools/translate.py tools/disc.manifest "$B/tools/"
+[ ! -f config/ds2.nvrptr ] || cp config/ds2.nvrptr "$B/tools/"   # (the native renderer's shader list)
 cp config/seed_functions.json config/seeds_upstream_starts.json config/manual_functions.json config/spin_waits.json \
    config/enhance.toml src/game/recomp/recomp_hooks.c "$B/tools/config/"
 "$B/python/bin/python3.14" -E -s -B tools/translate.py --hash "$GEN" > "$B/tools/GEN_SHA256"

@@ -35,7 +35,7 @@ if (( configure )) || [[ ! -f build/check/CMakeCache.txt ]]; then
         -DDS2_GEN_SUBDIR=gen-tkd -DXBOXRECOMP_DIR="$toolkit" -DXBOXRECOMP_OVERLAY=ON \
         > work/check-configure.log 2>&1 || { echo "configure failed: work/check-configure.log"; exit 1; }
 fi
-cmake --build build/check -j"$(nproc)" > work/check-build.log 2>&1 || { echo "build failed: work/check-build.log"; exit 1; }
+cmake --build build/check -j"${T7_JOBS:-$(nproc)}" > work/check-build.log 2>&1 || { echo "build failed: work/check-build.log"; exit 1; }
 echo "build: ok ($(grep -m1 -o 'XBOXRECOMP_DIR:PATH=.*' build/check/CMakeCache.txt | cut -d= -f2))"
 
 out=work/runs/chk; rm -rf "$out"; mkdir -p "$out"

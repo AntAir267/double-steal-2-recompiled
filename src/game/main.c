@@ -22,7 +22,7 @@
  *                WMADEC, XPP and DOLBY library sections
  *   Kernel imports: 118
  *
- * Usage: doublesteal2 [--game-dir DIR] [--save-dir DIR] [--headless]
+ * Usage: doublesteal2 [--game-dir DIR] [--save-dir DIR] [--headless] [--precache LIST XBE]
  *   --game-dir  folder holding default.xbe and the disc files
  *               (default: "game/Double-S.T.E.A.L - The Second Clash")
  *   --save-dir  the Xbox hard disk's save folders
@@ -69,6 +69,7 @@
 #include "settings.h"                  /* the settings overlay's side of this title */
 #include "skin.h"                      /* the overlay in the game's own look */
 #include "prof.h"                      /* DS2_PROFILE: where the main thread spends its time */
+#include "nvr/nvr_backend.h"
 
 /* RECOMP_TLS is required: the runtime defines the guest registers
  * thread-local, and a plain extern resolves to the TLS template rather than
@@ -408,8 +409,15 @@ int ds2_skip_intro;
  * console had it; off, only its knocks (recomp_hooks.c). */
 int ds2_engine_vibration;
 
+static void precache_progress(unsigned done, unsigned total, void *ctx)
+{
+    (void)ctx;
+    printf("[PRECACHE] %u %u\n", done, total);
+}
+
 int main(int argc, char **argv)
 {
+    const char *precache_list = NULL, *precache_xbe = NULL;
     const char *game = DS2_GAME_DIR, *save = NULL;
     int i;
 
@@ -426,9 +434,12 @@ int main(int argc, char **argv)
             save = argv[++i];
         else if (!strcmp(argv[i], "--headless"))
             setenv("RECOMP_HEADLESS", "1", 1);
-        else {
-            fprintf(stderr, "usage: %s [--game-dir DIR] [--save-dir DIR] [--headless]\n",
-                    argv[0]);
+        else if (!strcmp(argv[i], "--precache") && i + 2 < argc) {
+            precache_list = argv[++i];
+            precache_xbe = argv[++i];
+        } else {
+            fprintf(stderr, "usage: %s [--game-dir DIR] [--save-dir DIR] [--headless] "
+                    "[--precache LIST XBE]\n", argv[0]);
             return 2;
         }
     }
@@ -465,6 +476,11 @@ int main(int argc, char **argv)
     ds2_skip_intro = recomp_env(RENV_SKIP_INTRO) && strcmp(recomp_env(RENV_SKIP_INTRO), "0");
     ds2_engine_vibration = recomp_env(RENV_ENGINE_VIBRATION) && strcmp(recomp_env(RENV_ENGINE_VIBRATION), "0");
 #endif
+
+    /* The native renderer's shaders built ahead of time, no window or game
+     * needed; killing this is a safe skip (the rest build at the next start). */
+    if (precache_list)
+        return nvr_precache_main(precache_list, precache_xbe, precache_progress, NULL);
 
     /* The overlay in the game's own look, from the player's files. */
     ds2_skin_init(s_game_dir, s_save_dir);

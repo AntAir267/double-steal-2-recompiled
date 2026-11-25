@@ -427,6 +427,26 @@ the result and links it with the runtime built ahead of time.
   libc and libm to start [verified: readelf]. Ubuntu's own needs 19 libraries
   directly, so it can't be carried as it is.
 
+## The native renderer here, 2026-11-01
+
+The Graphics page's Renderer row (the toolkit's) works: Standard is the default,
+and Native applies at the next start [verified: settings.toml, then the log's "the
+native renderer draws"]. The mission 1 drive on native: no failed calls or crashes,
+no Vulkan validation errors, 2700 flips, 1.39 million draws with none skipped, and by
+eye the same menus, cutscene and driving as Standard at the same dumps. Not looked at:
+other missions, night, replays, Japanese, frame times.
+
+2026-11-24, on the toolkit with upstream v0.17's translator fixes (public 6c71b2d): the mission 1
+drive passes on both renderers on an RTX 4070 and a Radeon 880M. With the Vulkan validation layers
+(RTX 4070), Standard logs 10 errors (a depth buffer sampled while still in its drawing layout) and
+Native 48 (descriptor sets not bound, timestamp queries not reset); the previous toolkit logs the
+same [verified: an A/B on the same machine]. They are the toolkit's to fix; NVIDIA's driver
+tolerates them.
+
+`--precache LIST XBE` builds the native renderer's shaders ahead of time and returns
+nvr_precache_main's result (4 without native selected). The launcher passes
+RECOMP_NVR_SHADER_LIST and RECOMP_NVR_SHADER_XBE when the download has a list.
+
 ## Settings in OPTIONS, 2026-10-25
 
 The runtime's settings overlay is built in now (XBOXRECOMP_OVERLAY on for

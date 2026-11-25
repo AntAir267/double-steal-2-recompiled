@@ -93,6 +93,11 @@ void ds2_settings_init(const char *save_dir)
     xbox_SettingsHide(XS_GRAPHICS_TEXUP_PRELOAD);
     xbox_SettingsHide(XS_DISPLAY_OVERSCAN);
     xbox_SettingsHide(XS_INPUT_GLYPHS);
+    /* The films' upscaler (its best setting is a neural network: not for this
+     * port) and online play (the game has no multiplayer). */
+    xbox_SettingsHide(XS_GRAPHICS_FILMUP);
+    xbox_SettingsHide(XS_ONLINE_MODE);
+    xbox_SettingsHide(XS_ONLINE_REACTIONS);
     xbox_SettingsSetMenuEntryHint(
         "Adds PC SETTING to the game's OPTIONS screen (from the main menu and the pause menu)."
         " It opens this menu, like Back + Start or F1. Shows the next time that screen opens.");

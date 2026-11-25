@@ -501,6 +501,13 @@ static void launch_game(int argc, char **argv)
     path(save, sizeof save, user, "save");
     path(game, sizeof game, user, "game");
     make_dirs(save);
+    /* The native renderer's shader list, built in the background of a run: only that renderer reads these. */
+    char shader_list[1024], xbe[1024];
+    path(shader_list, sizeof shader_list, bundle, "tools/ds2.nvrptr");
+    if (exists(shader_list) && child_ci(game, "default.xbe", xbe, sizeof xbe)) {
+        SDL_SetEnvironmentVariable(SDL_GetEnvironment(), "RECOMP_NVR_SHADER_LIST", shader_list, true);
+        SDL_SetEnvironmentVariable(SDL_GetEnvironment(), "RECOMP_NVR_SHADER_XBE", xbe, true);
+    }
     const char *args[64];
     int k = 0;
     args[k++] = g;
